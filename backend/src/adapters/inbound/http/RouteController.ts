@@ -20,12 +20,16 @@ export class RouteController {
       const routes = await this.routeRepository.findAll();
       res.json(routes);
     } catch (err) {
-      res.status(500).json({ error: "Failed to fetch routes" });
+      console.error("GET /routes failed", err);
+      res.status(500).json({
+        error: "Failed to fetch routes",
+        details: err instanceof Error ? err.message : String(err),
+      });
     }
   }
 
   private async setBaseline(req: Request, res: Response): Promise<void> {
-    const id = req.params.id;
+    const id = req.params.id as string;
     if (!id) {
       res.status(400).json({ error: "Route id is required" });
       return;
@@ -41,7 +45,11 @@ export class RouteController {
       await this.routeRepository.setBaseline(id);
       res.status(204).send();
     } catch (err) {
-      res.status(500).json({ error: "Failed to set baseline" });
+      console.error("POST /routes/:id/baseline failed", err);
+      res.status(500).json({
+        error: "Failed to set baseline",
+        details: err instanceof Error ? err.message : String(err),
+      });
     }
   }
 }
