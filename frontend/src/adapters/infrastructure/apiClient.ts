@@ -11,10 +11,21 @@ export interface Route {
   isBaseline: boolean;
 }
 
+const BASE_URL = "http://localhost:3000";
+
 export async function fetchRoutes(): Promise<Route[]> {
-  const res = await fetch("http://localhost:3000/routes");
+  const res = await fetch(`${BASE_URL}/routes`);
   if (!res.ok) {
     throw new Error(`Failed to fetch routes: ${res.status} ${res.statusText}`);
   }
   return res.json() as Promise<Route[]>;
+}
+
+export async function setBaseline(routeId: string): Promise<void> {
+  const res = await fetch(`${BASE_URL}/routes/${routeId}/baseline`, {
+    method: "POST",
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to set baseline: ${res.status} ${res.statusText}`);
+  }
 }
