@@ -1,0 +1,11 @@
+{
+  "name": "fuel-eu-maritime-monorepo",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "bootstrap": "npm install"
+  }
+}
