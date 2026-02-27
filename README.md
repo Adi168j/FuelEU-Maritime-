@@ -215,16 +215,14 @@ curl -X POST http://localhost:3000/pools \
 ### Routes tab
 
 
-
-[Routes tab]
-![alt text](<Screenshot 2026-02-27 073213.png>)
+![Routes tab](docs/screenshots/routes-tab.png)
 
 ---
 
 ### Compare tab (with chart)
 
 
-[Compare tab]![alt text](<Screenshot 2026-02-27 073229.png>)
+![Compare tab](docs/screenshots/compare-tab.png)
 
 ---
 
@@ -232,12 +230,14 @@ curl -X POST http://localhost:3000/pools \
 
 
 
-[Banking tab]![alt text](<Screenshot 2026-02-27 073315.png>)
+![Banking tab](docs/screenshots/banking-tab.png)
 
 ---
 
 ### Pooling validation
 
 
-[Pooling tab]![alt text](<Screenshot 2026-02-27 073334.png>)
+
+![Pooling tab](docs/screenshots/pooling-tab.png)
+
 
