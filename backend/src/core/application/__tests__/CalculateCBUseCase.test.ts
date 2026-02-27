@@ -1,5 +1,5 @@
 import { CalculateCBUseCase } from "../CalculateCBUseCase";
-import { Route } from "../domain/Route";
+import { Route } from "../../domain/Route";
 
 describe("CalculateCBUseCase", () => {
   const useCase = new CalculateCBUseCase();

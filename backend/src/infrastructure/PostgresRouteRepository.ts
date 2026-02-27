@@ -20,10 +20,17 @@ export class PostgresRouteRepository implements IRouteRepository {
   constructor(private readonly pool: Pool) {}
 
   async findAll(): Promise<Route[]> {
-    const result = await this.pool.query(
-      "SELECT route_id, vessel_type, fuel_type, year, ghg_intensity, fuel_consumption, distance, total_emissions, is_baseline FROM routes ORDER BY year, route_id"
-    );
-    return result.rows.map(rowToRoute);
+    console.log("findAll() - Executing query...");
+    try {
+      const result = await this.pool.query(
+        "SELECT route_id, vessel_type, fuel_type, year, ghg_intensity, fuel_consumption, distance, total_emissions, is_baseline FROM routes ORDER BY year, route_id"
+      );
+      console.log("findAll() - Query succeeded, rows:", result.rows.length);
+      return result.rows.map(rowToRoute);
+    } catch (error) {
+      console.error("findAll() - Query failed:", error);
+      throw error;
+    }
   }
 
   async findById(id: string): Promise<Route | null> {
@@ -36,7 +43,14 @@ export class PostgresRouteRepository implements IRouteRepository {
   }
 
   async setBaseline(routeId: string): Promise<void> {
+    await this.pool.query("UPDATE routes SET is_baseline = false");
     await this.pool.query("UPDATE routes SET is_baseline = true WHERE route_id = $1", [
+      routeId,
+    ]);
+  }
+
+  async unsetBaseline(routeId: string): Promise<void> {
+    await this.pool.query("UPDATE routes SET is_baseline = false WHERE route_id = $1", [
       routeId,
     ]);
   }
