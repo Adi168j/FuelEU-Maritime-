@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Route } from "../apiClient";
-import { fetchRoutes, setBaseline } from "../apiClient";
+import { fetchRoutes, setBaseline, unsetBaseline } from "../apiClient";
 
 export function RoutesTab() {
   const [routes, setRoutes] = useState<Route[]>([]);
@@ -11,6 +11,12 @@ export function RoutesTab() {
 
   async function handleSetBaseline(routeId: string) {
     await setBaseline(routeId);
+    const updated = await fetchRoutes();
+    setRoutes(updated);
+  }
+
+  async function handleUnsetBaseline(routeId: string) {
+    await unsetBaseline(routeId);
     const updated = await fetchRoutes();
     setRoutes(updated);
   }
@@ -67,14 +73,23 @@ export function RoutesTab() {
                   {route.isBaseline ? "Yes" : "No"}
                 </td>
                 <td className="px-4 py-2">
-                  <button
-                    type="button"
-                    onClick={() => handleSetBaseline(route.routeId)}
-                    disabled={route.isBaseline}
-                    className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
-                  >
-                    Set Baseline
-                  </button>
+                  {route.isBaseline ? (
+                    <button
+                      type="button"
+                      onClick={() => handleUnsetBaseline(route.routeId)}
+                      className="rounded border border-gray-400 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                    >
+                      Unset
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handleSetBaseline(route.routeId)}
+                      className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+                    >
+                      Set Baseline
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
