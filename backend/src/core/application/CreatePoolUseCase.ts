@@ -1,9 +1,9 @@
-interface ComplianceBalance {
+export interface ComplianceBalance {
   id: string;
   amountGco2eq: number;
 }
 
-class CreatePoolUseCase {
+export default class CreatePoolUseCase {
   private balances: ComplianceBalance[];
 
   constructor(balances: ComplianceBalance[]) {
