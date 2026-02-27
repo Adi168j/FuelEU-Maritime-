@@ -70,8 +70,8 @@ CREATE TABLE pool_members (
 -- Using routeIds r1–r5; vessel types, fuels, years, and GHG intensities per spec.
 -- =============================================================================
 INSERT INTO routes (route_id, vessel_type, fuel_type, year, ghg_intensity, fuel_consumption, distance, total_emissions, is_baseline) VALUES
-('r1', 'container', 'VLSFO', 2025, 85.00, 100.00, 1000.00, 348500000.00, false),
+('r1', 'container', 'VLSFO', 2025, 85.00, 100.00, 1000.00, 348500000.00, true),
 ('r2', 'bulk', 'LNG', 2025, 90.50, 150.00, 1200.00, 556575000.00, false),
-('r3', 'passenger', 'VLSFO', 2024, 88.00, 80.00, 800.00, 288640000.00, true),
+('r3', 'passenger', 'VLSFO', 2024, 88.00, 80.00, 800.00, 288640000.00, false),
 ('r4', 'container', 'VLSFO', 2025, 92.00, 120.00, 1100.00, 452640000.00, false),
-('r5', 'bulk', 'methanol', 2025, 78.00, 90.00, 950.00, 287820000.00, true);
+('r5', 'bulk', 'methanol', 2025, 78.00, 90.00, 950.00, 287820000.00, false);
